@@ -1,0 +1,75 @@
+:root {
+    --bg-color: #060913;
+    --panel-bg: rgba(12, 19, 36, 0.75);
+    --primary-cyan: #00f3ff;
+    --primary-orange: #ff3c00;
+    --text-main: #d1f7ff;
+    --text-dim: #4c6b8a;
+    --grid-line: rgba(0, 243, 255, 0.05);
+    --border-cyan: rgba(0, 243, 255, 0.3);
+    --glow-cyan: 0 0 12px rgba(0, 243, 255, 0.4);
+    --glow-orange: 0 0 12px rgba(ff, 60, 0, 0.5);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.body {
+    background-color: var(--bg-color);
+    width: 100vw;
+    height: 100vh;
+}
+
+.play-screen {
+    background-color: var(--panel-bg);
+    /* background: url("images/play-game-bg-gif\ \(2\).gif") no-repeat center ; */
+    background: url("images/village/village-bg.gif") no-repeat center;
+    background-size: cover;
+    height: 100%;
+    position: relative;
+}
+
+.character-block {
+    bottom: 0;
+    /* background: #000; */
+    width: 100vw;
+    height: 50vh;
+    position: absolute;
+    
+}
+
+#robo-image {
+    bottom: 10vh;
+    left: 20%;
+    height: 170px;
+}
+
+#rock-image {
+    bottom: 10vh;
+    right: 10vh;
+    height: 100px;
+    animation: rock-move 5s infinite linear;
+}
+
+@keyframes rock-move {
+    0% {
+        transform:translatex(100vw);
+    }
+
+    100% {
+        transform: translatex(-100vw);
+    }
+}
+
+#floor-image {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 20vh;
+}
