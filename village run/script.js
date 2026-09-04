@@ -8,6 +8,7 @@ const finalScoreDisplay = document.querySelector(".final-score");
 const playBtn = document.querySelector("#playBtn");
 const restartBtn = document.querySelector("#restartBtn");
 
+const myAudio = new Audio('images/bgm.mp3');
 let scoreCount = 0;
 let scoreInterval = null;
 let collisionLoop = null;
@@ -46,6 +47,9 @@ document.addEventListener("keydown", handleKeydown);
 
 // --- game flow ---
 function startGame() {
+    myAudio.play();
+
+
     startPage.style.display = "none";
     gameOverPage.style.display = "none";
     gamePage.style.display = "block";
