@@ -48,6 +48,7 @@ document.addEventListener("keydown", handleKeydown);
 // --- game flow ---
 function startGame() {
     myAudio.play();
+    myAudio.loop = true;
 
 
     startPage.style.display = "none";
