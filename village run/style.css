@@ -120,7 +120,7 @@ button:active {
 }
 
 .block-animation {
-    animation: block 2s linear infinite;
+    animation: block 0.7s linear infinite;
 }
 
 @keyframes block {
