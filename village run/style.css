@@ -1,75 +1,215 @@
-:root {
-    --bg-color: #060913;
-    --panel-bg: rgba(12, 19, 36, 0.75);
-    --primary-cyan: #00f3ff;
-    --primary-orange: #ff3c00;
-    --text-main: #d1f7ff;
-    --text-dim: #4c6b8a;
-    --grid-line: rgba(0, 243, 255, 0.05);
-    --border-cyan: rgba(0, 243, 255, 0.3);
-    --glow-cyan: 0 0 12px rgba(0, 243, 255, 0.4);
-    --glow-orange: 0 0 12px rgba(ff, 60, 0, 0.5);
-}
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     user-select: none;
-    transition: all 0.2s ease-in-out;
+    -webkit-tap-highlight-color: transparent;
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 400;
+    font-style: normal;
 }
 
-.body {
-    background-color: var(--bg-color);
-    width: 100vw;
-    height: 100vh;
-}
-
-.play-screen {
-    background-color: var(--panel-bg);
-    /* background: url("images/play-game-bg-gif\ \(2\).gif") no-repeat center ; */
-    background: url("images/village/village-bg.gif") no-repeat center;
-    background-size: cover;
+html, body {
+    width: 100%;
     height: 100%;
+    overflow: hidden;
+}
+
+.start-page,
+.game-over-page {
+    width: 100%;
+    height: 100%;
+    background:
+        linear-gradient(rgba(75, 97, 75, 0.7), rgba(75, 97, 75, 0.7)),
+        url('images/village/village-bg.gif') no-repeat center center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 1rem;
+}
+
+.game-over-page {
+    display: none; /* toggled to flex by JS */
+}
+
+h2 {
+    font-size: clamp(1.1rem, 5vw, 2rem);
+    padding: 1rem;
+    color: rgb(4, 49, 4);
+    line-height: 1.5;
+}
+
+.hint,
+.final-score {
+    font-size: clamp(0.55rem, 2vw, 0.8rem);
+    color: rgb(4, 49, 4);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+button {
+    padding: 0.6rem 1.5rem;
+    border-radius: 20px;
+    border: 3px dotted black;
+    background-color: forestgreen;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bolder;
+    font-size: clamp(0.6rem, 2vw, 0.9rem);
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(0.96);
+}
+
+.game-page {
+    width: 100%;
+    height: 100%;
+    background:
+        linear-gradient(rgba(75, 97, 75, 0.7), rgba(75, 97, 75, 0.7)),
+        url('images/village/village-bg.gif') no-repeat center center;
+    background-size: cover;
+    text-transform: uppercase;
     position: relative;
+    display: none;
+    overflow: hidden;
 }
 
-.character-block {
-    bottom: 0;
-    /* background: #000; */
-    width: 100vw;
-    height: 50vh;
+.score {
+    font-size: clamp(0.6rem, 2vw, 0.85rem);
     position: absolute;
-    
+    top: 6vh;
+    right: 5vw;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 2px black;
 }
 
-#robo-image {
-    bottom: 10vh;
-    left: 20%;
-    height: 170px;
+.character-container {
+    height: 25vh;
+    width: auto;
+    position: absolute;
+    bottom: 7vh;
+    left: 4%;
+    z-index: 2;
 }
 
-#rock-image {
-    bottom: 10vh;
-    right: 10vh;
-    height: 100px;
-    animation: rock-move 5s infinite linear;
+.character-container img {
+    height: 100%;
+    display: block;
 }
 
-@keyframes rock-move {
+.obstacle-container {
+    height: 18vh;
+    width: 4rem;
+    max-width: 12vw;
+    position: absolute;
+    bottom: 7vh;
+    left: 102%;
+    background: red;
+    border-radius: 20px 20px 0px 0px;
+    border: 4px dashed black;
+    z-index: 1;
+}
+
+.block-animation {
+    animation: block 2s linear infinite;
+}
+
+@keyframes block {
     0% {
-        transform:translatex(100vw);
+        left: 102%;
     }
-
     100% {
-        transform: translatex(-100vw);
+        left: -8%;
     }
 }
 
-#floor-image {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100vw;
-    height: 20vh;
+/* Single run, matched to the JS animationend listener — no more
+   getting cut off mid-air by a mismatched setTimeout. */
+.jump-animation {
+    animation: jump 2s ease-in-out;
+}
+
+@keyframes jump {
+    0% {
+        bottom: 7vh;
+    }
+    50% {
+        bottom: 38vh;
+    }
+    100% {
+        bottom: 7vh;
+    }
+}
+
+/* ---------- responsive breakpoints ---------- */
+
+/* Tablets */
+@media (max-width: 768px) {
+    .character-container {
+        height: 20vh;
+    }
+
+    .obstacle-container {
+        height: 15vh;
+        width: 3rem;
+    }
+
+    @keyframes jump {
+        0% { bottom: 7vh; }
+        50% { bottom: 32vh; }
+        100% { bottom: 7vh; }
+    }
+}
+
+/* Phones */
+@media (max-width: 480px) {
+    .character-container {
+        height: 16vh;
+        left: 6%;
+    }
+
+    .obstacle-container {
+        height: 12vh;
+        width: 2.5rem;
+        max-width: 16vw;
+    }
+
+    .score {
+        top: 4vh;
+        right: 4vw;
+    }
+
+    @keyframes jump {
+        0% { bottom: 6vh; }
+        50% { bottom: 26vh; }
+        100% { bottom: 6vh; }
+    }
+}
+
+/* Short / landscape phones */
+@media (max-height: 420px) {
+    .character-container {
+        height: 40vh;
+        bottom: 10vh;
+    }
+
+    .obstacle-container {
+        height: 28vh;
+        bottom: 10vh;
+    }
+
+    @keyframes jump {
+        0% { bottom: 10vh; }
+        50% { bottom: 55vh; }
+        100% { bottom: 10vh; }
+    }
 }
