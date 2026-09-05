@@ -176,7 +176,7 @@ button:active {
 
     @keyframes jump {
         0% { bottom: 7vh; }
-        50% { bottom: 58vh; }
+        50% { bottom: 38vh; }
         100% { bottom: 7vh; }
     }
 }
@@ -201,7 +201,7 @@ button:active {
 
     @keyframes jump {
         0% { bottom: 6vh; }
-        50% { bottom: 36vh; }
+        50% { bottom: 30vh; }
         100% { bottom: 6vh; }
     }
 }
@@ -220,7 +220,7 @@ button:active {
 
     @keyframes jump {
         0% { bottom: 10vh; }
-        50% { bottom: 35vh; }
+        50% { bottom: 57vh; }
         100% { bottom: 10vh; }
     }
 }
