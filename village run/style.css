@@ -135,7 +135,7 @@ button:active {
 /* Single run, matched to the JS animationend listener — no more
    getting cut off mid-air by a mismatched setTimeout. */
 .jump-animation {
-    animation: jump 0.7s ease-in-out;
+    animation: jump 1s ease-in-out;
 }
 
 @keyframes jump {
@@ -190,7 +190,7 @@ button:active {
 
     @keyframes jump {
         0% { bottom: 6vh; }
-        50% { bottom: 26vh; }
+        50% { bottom: 56vh; }
         100% { bottom: 6vh; }
     }
 }
