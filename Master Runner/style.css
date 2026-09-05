@@ -11,7 +11,8 @@
     font-style: normal;
 }
 
-html, body {
+html,
+body {
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -21,30 +22,41 @@ html, body {
 .game-over-page,
 .change-page {
     width: 100%;
-    height: 100%;
+    height: 100dvh;
+    min-height: 100dvh;
+
     background:
-        linear-gradient(rgba(75, 97, 75, 0.7), rgba(75, 97, 75, 0.7)),
-        url('https://www.parallelcube.com/web/wp-content/uploads/2017/11/parallaxsample.gif') no-repeat center center;
+        linear-gradient(
+            rgba(75, 97, 75, 0.7),
+            rgba(75, 97, 75, 0.7)
+        ),
+        url('https://www.parallelcube.com/web/wp-content/uploads/2017/11/parallaxsample.gif')
+        no-repeat center center;
+
     background-size: cover;
+
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
     text-transform: uppercase;
     text-align: center;
     padding: 1rem;
 }
 
 .game-over-page {
-    display: none; /* toggled to flex by JS */
+    display: none;
 }
+
 .change-page {
-    display: none; /* toggled to flex by JS */
-    
+    display: none;
 }
-.page{
+
+.page {
     background-image: url("images/village/village-bg.gif");
 }
+
 h2 {
     font-size: clamp(1.1rem, 5vw, 2rem);
     padding: 1rem;
@@ -80,14 +92,25 @@ button:active {
 
 .game-page {
     width: 100%;
-    height: 100%;
-    background: url('images/village/village-bg.gif') no-repeat center center;
+    height: 100dvh;
+
+    background: url('images/village/village-bg.gif')
+        no-repeat center center;
+
     background-size: cover;
+
     text-transform: uppercase;
     position: relative;
     display: none;
     overflow: hidden;
+
+    /* Prevent mobile browser gestures */
+    touch-action: none;
 }
+
+/* =========================
+   SCORE
+========================= */
 
 .score {
     font-size: clamp(0.6rem, 2vw, 0.85rem);
@@ -97,37 +120,55 @@ button:active {
     font-weight: bold;
     color: white;
     text-shadow: 1px 1px 2px black;
+    z-index: 10;
 }
+
+/* =========================
+   CHARACTER
+========================= */
 
 .character-container {
     height: 25vh;
     width: 87px;
+
     position: absolute;
     bottom: 7vh;
     left: 4%;
-    /* border-right: 2px solid; */
+
     border-radius: 70px;
+
     display: flex;
     justify-content: center;
+    align-items: flex-end;
+
+    z-index: 5;
 }
 
 .character-container img {
     height: 100%;
+    width: auto;
     display: block;
 }
+
+/* =========================
+   OBSTACLE
+========================= */
 
 .obstacle-container {
     height: 18vh;
     width: 4rem;
     max-width: 12vw;
+
     position: absolute;
     bottom: 7vh;
     left: 102%;
+
     background: rgb(69, 58, 4);
-    border-radius: 20px 20px 0px 0px;
+
+    border-radius: 20px 20px 0 0;
     border: 3px solid black;
-    z-index: 1;
-    
+
+    z-index: 4;
 }
 
 .block-animation {
@@ -138,13 +179,16 @@ button:active {
     0% {
         left: 102%;
     }
+
     100% {
         left: -8%;
     }
 }
 
-/* Single run, matched to the JS animationend listener — no more
-   getting cut off mid-air by a mismatched setTimeout. */
+/* =========================
+   JUMP
+========================= */
+
 .jump-animation {
     animation: jump 0.9s ease-in-out;
 }
@@ -153,45 +197,55 @@ button:active {
     0% {
         bottom: 7vh;
     }
+
     50% {
         bottom: 58vh;
     }
+
     100% {
         bottom: 7vh;
     }
 }
 
-/* ---------- responsive breakpoints ---------- */
+/* =========================
+   FLOOR
+========================= */
 
-/* Tablets */
+.floor-for-run {
+    height: 7vh;
+    width: 100vw;
+
+    background: #000;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    display: none;
+
+    z-index: 3;
+}
+
+
+/* =====================================================
+   TABLETS
+===================================================== */
+
 @media (max-width: 768px) {
+
     .character-container {
         height: 20vh;
+        width: 70px;
+        left: 5%;
+        bottom: 8vh;
     }
 
     .obstacle-container {
         height: 15vh;
         width: 3rem;
-    }
-
-    @keyframes jump {
-        0% { bottom: 7vh; }
-        50% { bottom: 58vh; }
-        100% { bottom: 7vh; }
-    }
-}
-
-/* Phones */
-@media (max-width: 480px) {
-    .character-container {
-        height: 16vh;
-        left: 6%;
-    }
-
-    .obstacle-container {
-        height: 12vh;
-        width: 2.5rem;
-        max-width: 16vw;
+        max-width: 12vw;
+        bottom: 8vh;
     }
 
     .score {
@@ -200,38 +254,214 @@ button:active {
     }
 
     @keyframes jump {
-        0% { bottom: 6vh; }
-        50% { bottom: 56vh; }
-        100% { bottom: 6vh; }
+        0% {
+            bottom: 8vh;
+        }
+
+        50% {
+            bottom: 55vh;
+        }
+
+        100% {
+            bottom: 8vh;
+        }
     }
 }
 
-/* Short / landscape phones */
-@media (max-height: 420px) {
-    .character-container {
-        height: 40vh;
-        bottom: 10vh;
+
+/* =====================================================
+   MOBILE PHONES
+===================================================== */
+
+@media (max-width: 480px) {
+
+    .game-page {
+        height: 100dvh;
+        min-height: 100dvh;
+
+        /*
+         * Slightly zoom the background so the village
+         * doesn't look stretched on tall phones.
+         */
+        background-position: center bottom;
+        background-size: cover;
     }
 
+    /* ---------- SCORE ---------- */
+
+    .score {
+        top: 3vh;
+        right: 4vw;
+
+        font-size: 0.55rem;
+        line-height: 1.5;
+    }
+
+    /* ---------- CHARACTER ---------- */
+
+    .character-container {
+        width: 58px;
+        height: 17vh;
+
+        left: 5%;
+        bottom: 8vh;
+    }
+
+    .character-container img {
+        height: 100%;
+        width: auto;
+        object-fit: contain;
+    }
+
+    /* ---------- OBSTACLE ---------- */
+
     .obstacle-container {
-        height: 28vh;
-        bottom: 10vh;
+        width: 2.4rem;
+        height: 13vh;
+
+        max-width: none;
+
+        bottom: 8vh;
+
+        border-width: 2px;
+        border-radius: 12px 12px 0 0;
+    }
+
+    /* ---------- JUMP ---------- */
+
+    .jump-animation {
+        animation: jump 0.75s ease-in-out;
     }
 
     @keyframes jump {
-        0% { bottom: 10vh; }
-        50% { bottom: 55vh; }
-        100% { bottom: 10vh; }
+        0% {
+            bottom: 8vh;
+        }
+
+        50% {
+            bottom: 52vh;
+        }
+
+        100% {
+            bottom: 8vh;
+        }
+    }
+
+    /* ---------- FLOOR ---------- */
+
+    .floor-for-run {
+        height: 8vh;
+    }
+
+    /* ---------- BUTTONS ---------- */
+
+    button {
+        width: min(80vw, 16rem);
+        min-height: 44px;
+
+        padding: 0.75rem 1rem;
+
+        font-size: 0.48rem;
+
+        margin: 0.4rem;
+    }
+
+    h2 {
+        font-size: clamp(0.9rem, 5vw, 1.4rem);
+        padding: 0.75rem;
+    }
+
+    .hint,
+    .final-score {
+        font-size: clamp(0.48rem, 2.5vw, 0.65rem);
+        padding: 0 1rem;
     }
 }
 
-.floor-for-run{
-    height: 7vh ;
-    width: 100vw;
-    background: #000;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: none;
+
+/* =====================================================
+   VERY SMALL / SHORT PHONES
+===================================================== */
+
+@media (max-width: 480px) and (max-height: 700px) {
+
+    .character-container {
+        height: 20vh;
+        bottom: 9vh;
+        width: 60px;
+    }
+
+    .obstacle-container {
+        height: 15vh;
+        bottom: 9vh;
+    }
+
+    @keyframes jump {
+        0% {
+            bottom: 9vh;
+        }
+
+        50% {
+            bottom: 57vh;
+        }
+
+        100% {
+            bottom: 9vh;
+        }
+    }
+
+    .floor-for-run {
+        height: 9vh;
+    }
+}
+
+
+/* =====================================================
+   LANDSCAPE PHONES
+===================================================== */
+
+@media (max-height: 500px) and (orientation: landscape) {
+
+    .game-page {
+        height: 100dvh;
+    }
+
+    .character-container {
+        height: 35vh;
+        width: 65px;
+        bottom: 10vh;
+        left: 5%;
+    }
+
+    .obstacle-container {
+        height: 25vh;
+        width: 3rem;
+        bottom: 10vh;
+    }
+
+    .score {
+        top: 3vh;
+        right: 3vw;
+    }
+
+    @keyframes jump {
+        0% {
+            bottom: 10vh;
+        }
+
+        50% {
+            bottom: 58vh;
+        }
+
+        100% {
+            bottom: 10vh;
+        }
+    }
+
+    .floor-for-run {
+        height: 10vh;
+    }
+}
+.game-page {
+    height: 100dvh;
 }
