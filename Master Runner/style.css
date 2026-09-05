@@ -226,7 +226,7 @@ button:active {
 }
 
 .floor-for-run{
-    height: 7vh ;
+    height: 8vh ;
     width: 100vw;
     background: #000;
     position: fixed;
@@ -234,4 +234,6 @@ button:active {
     left: 0;
     right: 0;
     display: none;
+
+
 }
