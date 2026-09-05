@@ -18,12 +18,13 @@ html, body {
 }
 
 .start-page,
-.game-over-page {
+.game-over-page,
+.change-page {
     width: 100%;
     height: 100%;
     background:
         linear-gradient(rgba(75, 97, 75, 0.7), rgba(75, 97, 75, 0.7)),
-        url('images/village/village-bg.gif') no-repeat center center;
+        url('https://www.parallelcube.com/web/wp-content/uploads/2017/11/parallaxsample.gif') no-repeat center center;
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -37,7 +38,13 @@ html, body {
 .game-over-page {
     display: none; /* toggled to flex by JS */
 }
-
+.change-page {
+    display: none; /* toggled to flex by JS */
+    
+}
+.page{
+    background-image: url("images/village/village-bg.gif");
+}
 h2 {
     font-size: clamp(1.1rem, 5vw, 2rem);
     padding: 1rem;
@@ -61,8 +68,10 @@ button {
     color: white;
     text-transform: uppercase;
     font-weight: bolder;
-    font-size: clamp(0.6rem, 2vw, 0.9rem);
+    font-size: 0.5rem;
     cursor: pointer;
+    margin: auto 10px;
+    width: 10rem;
 }
 
 button:active {
@@ -72,9 +81,7 @@ button:active {
 .game-page {
     width: 100%;
     height: 100%;
-    background:
-        linear-gradient(rgba(75, 97, 75, 0.7), rgba(75, 97, 75, 0.7)),
-        url('images/village/village-bg.gif') no-repeat center center;
+    background: url('images/village/village-bg.gif') no-repeat center center;
     background-size: cover;
     text-transform: uppercase;
     position: relative;
@@ -94,11 +101,14 @@ button:active {
 
 .character-container {
     height: 25vh;
-    width: auto;
+    width: 87px;
     position: absolute;
     bottom: 7vh;
     left: 4%;
-    z-index: 2;
+    /* border-right: 2px solid; */
+    border-radius: 70px;
+    display: flex;
+    justify-content: center;
 }
 
 .character-container img {
@@ -113,10 +123,11 @@ button:active {
     position: absolute;
     bottom: 7vh;
     left: 102%;
-    background: red;
+    background: rgb(69, 58, 4);
     border-radius: 20px 20px 0px 0px;
-    border: 4px dashed black;
+    border: 3px solid black;
     z-index: 1;
+    
 }
 
 .block-animation {
@@ -135,7 +146,7 @@ button:active {
 /* Single run, matched to the JS animationend listener — no more
    getting cut off mid-air by a mismatched setTimeout. */
 .jump-animation {
-    animation: jump 1s ease-in-out;
+    animation: jump 0.9s ease-in-out;
 }
 
 @keyframes jump {
@@ -212,4 +223,15 @@ button:active {
         50% { bottom: 55vh; }
         100% { bottom: 10vh; }
     }
+}
+
+.floor-for-run{
+    height: 7vh ;
+    width: 100vw;
+    background: #000;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: none;
 }

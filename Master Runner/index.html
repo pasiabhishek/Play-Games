@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Master Runner</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="start-page page">
+        <h2>Master Runner</h2>
+        <p class="hint">tap / click / space / ↑ to jump</p>
+        <div class="controll-btn" style="display: flex; ">
+            <button class="change-btn" id="changeBtn">Change</button>
+            <button class="play-btn" id="playBtn">play</button>
+        </div>
+    </div>
+
+    <div class="change-page page">
+        <h2>Select One Runner</h2>
+        <div class="controll-btn" style="display: flex; ">
+            <button class="city-btn" id="cityBtn">City Runner</button>
+            <button class="forest-btn" id="forestBtn">Forest Runner</button>
+        </div>
+    </div>
+    <div class="game-page page">
+        <div class="score">score : 0</div>
+        <div class="character-container">
+            <img src="images/village/boy.gif" id="character" alt="boy-gif">
+            <!-- <img src="https://media.moddb.com/images/games/1/65/64176/John_run_SMALL.gif" id="character" alt="boy-gif"> -->
+        </div>
+        <div class="obstacle-container"></div>
+        <div class="floor-for-run"></div>
+
+    </div>
+
+    <div class="game-over-page page">
+        <h2>game over</h2>
+        <p class="final-score">score : 0</p>
+        <div class="controll-btn" style="display: flex; ">
+            <button onclick="change()" class="change-btn" id="changeBtn">Change</button>
+            <button class="restart-btn" id="restartBtn">play again</button>
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>
